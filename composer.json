@@ -13,10 +13,17 @@
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "Gemvc\\Installer\\": "src/"
+            "Gemvc\\Installer\\": "src/",
+            "Model\\":"src/model/",
+            "Table\\": "src/table/",
+            "Controller\\": "src/controller"
         }
     },
     "authors": [
+        {
+            "name": "Ali Khorsandfard",
+            "email": "secure73@gmail.com"
+        },
         {
             "name": "Roboxon",
             "email": "145359440+roboxon@users.noreply.github.com"
