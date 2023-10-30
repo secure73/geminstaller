@@ -13,10 +13,10 @@
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "Gemvc\\Installer\\": "src/",
-            "Model\\":"src/model/",
-            "Table\\": "src/table/",
-            "Controller\\": "src/controller"
+            "Gemvc\\Installer\\": "app/",
+            "Controller\\": "app/controller",
+            "Model\\":"app/model/",
+            "Table\\": "app/table/"
         }
     },
     "authors": [
