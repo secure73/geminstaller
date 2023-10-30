@@ -13,7 +13,7 @@
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "Gemvc\\Installer\\": "app/",
+            "App\\": "app/",
             "Controller\\": "app/controller",
             "Model\\":"app/model/",
             "Table\\": "app/table/"
