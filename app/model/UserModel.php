@@ -1,7 +1,7 @@
 <?php
 namespace App\Model;
 use App\Table\UserTable;
-use GemLibrary\Helper\CryptoHelper;
+use GemLibrary\Helper\CryptHelper;
 
 class UserModel extends UserTable{
     public function __construct()
@@ -11,7 +11,7 @@ class UserModel extends UserTable{
 
     public function create():int|null
     {
-        $this->password = CryptoHelper::hashPassword($this->password);
+        $this->password = CryptHelper::hashPassword($this->password);
         return $this->insert();
     }
 }
