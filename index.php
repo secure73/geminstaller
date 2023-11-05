@@ -3,10 +3,11 @@ require_once 'vendor/autoload.php';
 
 use GemLibrary\Helper\NoCors;
 use GemFramework\Core\Bootstrap;
-use GemLibrary\Http\GemRequest;
+use GemLibrary\Http\ApacheRequest;
 
 NoCors::NoCors();
-$bootstrap = new Bootstrap(new GemRequest());
+$serverRequest = new ApacheRequest();
+$bootstrap = new Bootstrap($serverRequest->request);
 $bootstrap->response->show();
 
 
