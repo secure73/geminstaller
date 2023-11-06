@@ -1,7 +1,6 @@
 <?php
 namespace App\Controller;
 use GemFramework\Core\Controller;
-use Gemlibrary\Http\JsonResponse;
 class IndexController extends Controller
 {
     public function __construct(\GemLibrary\Http\GemRequest $request)
