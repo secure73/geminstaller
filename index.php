@@ -8,6 +8,5 @@ use GemLibrary\Http\ApacheRequest;
 NoCors::NoCors();
 $serverRequest = new ApacheRequest();
 $bootstrap = new Bootstrap($serverRequest->request);
-$bootstrap->response->show();
 
 
