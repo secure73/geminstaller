@@ -8,8 +8,12 @@ class IndexController extends Controller
         parent::__construct($request);
     }
 
-    public function index():void
+    public function index():JsonResponse
     {
-        $this->response->success('','','welcome to gemvc');
+        $message = new \stdClass();
+        $message->message = 'welcome to gemvc API';
+        $message->requestId = $this->request->getId();
+        $this->response->success($message);
+        return $this->response;
     }
 }
