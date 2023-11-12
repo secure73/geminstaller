@@ -21,7 +21,7 @@
             "App\\Table\\": "../../../app/table/"
         },
         "files": [
-            "../app/config.php"
+            "../../../app/config.php"
         ]
     },
     "authors": [
