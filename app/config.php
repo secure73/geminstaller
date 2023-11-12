@@ -1,10 +1,11 @@
 <?php
 const ROOT = '';
 const DEFAULT_LANGUAGE = 'de';
-const LIBRARY = 'gemvc/lib/';
+
 const URL = 'https://your_domain.com';
 const URI_CONTROLLER_SEGMENT = 1;
 const URI_METHOD_SEGMENT = 2;
+
 const TOKEN_IP_RESTRICT = false;
 const TOKEN_USER_MACHINE_RESTRICT = true;
 const TOKEN_ISSUER = 'your company or project name';
