@@ -1,7 +1,7 @@
 {
-    "name": "gemvc/framework",
-    "description": "Super light Framework based on Gemvc Library",
-    "type": "library",
+    "name": "gemvc/installer",
+    "description": "Super light project based on Gemvc Framework",
+    "type": "project",
     "require": {
         "gemvc/framework": "^1.0"
     },
