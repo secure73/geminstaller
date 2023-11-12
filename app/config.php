@@ -2,9 +2,9 @@
 const ROOT = '';
 const DEFAULT_LANGUAGE = 'de';
 
-const URL = 'https://your_domain.com';
-const URI_CONTROLLER_SEGMENT = 1;
-const URI_METHOD_SEGMENT = 2;
+const URL = 'https://your_domain.com'; // your domain
+const URI_CONTROLLER_SEGMENT = 1; // the segment of controller in url ex: https://your_domain.com/controller
+const URI_METHOD_SEGMENT = 2; // the segment of method in url ex: https://your_domain.com/controller/method
 
 const TOKEN_IP_RESTRICT = false;
 const TOKEN_USER_MACHINE_RESTRICT = true;
