@@ -1,13 +1,15 @@
 <?php
 require_once 'vendor/autoload.php';
 
-$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
-$dotenv->load();
-
-use GemLibrary\Helper\NoCors;
-use GemFramework\Core\Bootstrap;
 use GemLibrary\Http\ApacheRequest;
+use App\Core\Bootstrap;
+use GemLibrary\Helper\NoCors;
+use Symfony\Component\Dotenv\Dotenv;
 
 NoCors::NoCors();
-$serverRequest = new ApacheRequest();
-$bootstrap = new Bootstrap($serverRequest->request);
+
+$dotenv = new Dotenv();
+$dotenv->load(__DIR__.'/app/.env');
+
+$webserver = new ApacheRequest();
+$bootstrap = new Bootstrap($webserver->request);

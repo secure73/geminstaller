@@ -3,24 +3,17 @@
     "description": "Super light project based on Gemvc Framework",
     "type": "project",
     "require": {
-        "gemvc/framework": "^2.0"
+        "gemvc/framework": "^3.0"
     },
     "license": "Apache-2.0",
     "autoload": {
         "psr-4": {
-        },
-        "files": [
-            "app/config.php"
-        ]
+        }
     },
     "authors": [
         {
             "name": "Ali Khorsandfard",
-            "email": "secure73@gmail.com"
-        },
-        {
-            "name": "Roboxon",
-            "email": "roboxon@roboxon.com"
+            "email": "ali.khorsandfard@gmail.com"
         }
     ],
     "minimum-stability": "stable"
