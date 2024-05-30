@@ -2,10 +2,11 @@
 
 namespace App\Service;
 
-use App\Core\Service;
-use GemLibrary\Http\Request;
-use GemLibrary\Http\JsonResponse;
-use GemLibrary\Http\Response;
+use App\Controller\IndexController;
+use Gemvc\Core\Service;
+use Gemvc\Http\Request;
+use Gemvc\Http\JsonResponse;
+use Gemvc\Http\Response;
 
 class Index extends Service
 {
@@ -16,6 +17,6 @@ class Index extends Service
 
     public function index(): JsonResponse
     {
-        return Response::success('welcome to Gemvc app');
+        return (new IndexController($this->request))->index();
     }
 }
