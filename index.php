@@ -1,9 +1,9 @@
 <?php
 require_once 'vendor/autoload.php';
 
-use GemLibrary\Http\ApacheRequest;
-use App\Core\Bootstrap;
-use GemLibrary\Helper\NoCors;
+use Gemvc\Core\Bootstrap;
+use Gemvc\Http\ApacheRequest;
+use Gemvc\Http\NoCors;
 use Symfony\Component\Dotenv\Dotenv;
 
 NoCors::NoCors();
