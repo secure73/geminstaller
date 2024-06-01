@@ -1,0 +1,333 @@
+{
+	"info": {
+		"_postman_id": "d694ffd1-9285-49aa-9ff9-d63053d3c8dc",
+		"name": "ZiroAPI",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "1598953"
+	},
+	"item": [
+		{
+			"name": "Login Service",
+			"item": [
+				{
+					"name": "login By Email",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const ResiBody = pm.response.json();\r",
+									"let accessToken = ResiBody.data.accessToken;\r",
+									"let refreshToken = ResiBody.data.refreshToken;\r",
+									"pm.globals.set(\"accessToken\", accessToken);\r",
+									"pm.globals.set(\"refreshToken\", refreshToken);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "email",
+									"value": "ali1@1.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "12345",
+									"type": "text"
+								}
+							]
+						},
+						"url": "localhost/ziro/login/byEmail"
+					},
+					"response": []
+				},
+				{
+					"name": "login By Token",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const ResiBody = pm.response.json();\r",
+									"let accessToken = ResiBody.data.accessToken;\r",
+									"pm.globals.set(\"accessToken\", accessToken );"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{refreshToken}}"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "token",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": "localhost/ziro/login/byToken/"
+					},
+					"response": []
+				},
+				{
+					"name": "renew Token",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const ResiBody = pm.response.json();\r",
+									"let accessToken = ResiBody.data.accessToken;\r",
+									"pm.globals.set(\"accessToken\", accessToken );"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{refreshToken}}"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": "localhost/ziro/login/accessToken/"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User Service",
+			"item": [
+				{
+					"name": "create new contact",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{accessToken}}"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "denipro",
+									"type": "text"
+								},
+								{
+									"key": "tel",
+									"value": "+8788221",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "we@skj.coe",
+									"type": "text"
+								}
+							]
+						},
+						"url": "localhost/ziro/user/createContact"
+					},
+					"response": []
+				},
+				{
+					"name": "update contact",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{accessToken}}"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "id",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "name",
+									"value": "takhti",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "bers@sd.com",
+									"type": "text"
+								},
+								{
+									"key": "address",
+									"value": "Berlin",
+									"type": "text"
+								}
+							]
+						},
+						"url": "localhost/ziro/user/updateContact"
+					},
+					"response": []
+				},
+				{
+					"name": "delete contact",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"console.log(pm.response.text());  // Log entire text response\r",
+									"console.log(pm.response.json());\r",
+									"console.log(pm.response.headers);\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"insecureHTTPParser": false
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{accessToken}}"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "id",
+									"value": "6",
+									"type": "text"
+								}
+							]
+						},
+						"url": "localhost/ziro/user/deleteContact"
+					},
+					"response": []
+				},
+				{
+					"name": "find contact",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{accessToken}}"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "j",
+									"type": "text"
+								}
+							]
+						},
+						"url": "localhost/ziro/user/findContact"
+					},
+					"response": []
+				},
+				{
+					"name": "list contact",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{accessToken}}"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": "localhost/ziro/user/listContacts"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Register Service",
+			"item": [
+				{
+					"name": "register by Email and Password",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "email",
+									"value": "ali1@1.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "12345",
+									"type": "text"
+								}
+							]
+						},
+						"url": "localhost/ziro/register/byEmail"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "index",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "localhost/ziro"
+			},
+			"response": []
+		}
+	]
+}

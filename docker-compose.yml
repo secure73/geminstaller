@@ -23,7 +23,7 @@ services:
       MYSQL_PASSWORD: mypassword
     volumes:
       - db_data:/var/lib/mysql
-
+  #in production you can remove phpmyadmin service
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
     container_name: phpmyadmin
