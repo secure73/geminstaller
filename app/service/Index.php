@@ -6,7 +6,6 @@ use App\Controller\IndexController;
 use Gemvc\Core\Service;
 use Gemvc\Http\Request;
 use Gemvc\Http\JsonResponse;
-use Gemvc\Http\Response;
 
 class Index extends Service
 {
