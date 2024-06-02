@@ -19,13 +19,12 @@ class UserModel extends Model
     public static function createLoginCredential(int $id): JsonResponse
     {
 
-        $user = new UserTable();
-        $user->selectById($id);
+        $user = (new UserTable())->selectById($id);
         $user->password = "";
 
         $token = new JWTToken();
-        #you can create role model and table to set token Role!
-        #$token->role = $user->role;
+        #you can create role model with its relevant table to set token Role!
+        $token->role = "";
         $refreshToken = $token->createRefreshToken($id);
         $accessToken = $token->createAccessToken($id);
 

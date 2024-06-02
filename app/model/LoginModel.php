@@ -22,6 +22,7 @@ class LoginModel extends Model
     {
         $user = new UserTable();
         $this->mapPostManuel(["email"],$user);
+        $user = $user->selectByEmail();
         if (!$user->selectByEmail()) {
             return Response::unauthorized('username or password is wrong');
         }

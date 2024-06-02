@@ -15,7 +15,6 @@ class UserTable extends Table
 
     public function __construct()
     {
-        $this->name = null;
         parent::__construct();
     }
 
