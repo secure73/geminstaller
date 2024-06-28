@@ -23,9 +23,4 @@ class Login extends Service
     {
         return (new LoginController($this->request))->loginByToken();
     }
-
-    public function accessToken(): JsonResponse
-    {
-        return (new LoginController($this->request))->accessToken();
-    }
 }
