@@ -18,20 +18,19 @@ class UserModel extends Model
 
     public static function createLoginCredential(int $id): JsonResponse
     {
-
         $user = (new UserTable())->selectById($id);
+        /**@phpstan-ignore-next-line */
         $user->password = "";
 
         $token = new JWTToken();
         #you can create role model with its relevant table to set token Role!
-        $token->role = "";
-        $refreshToken = $token->createRefreshToken($id);
-        $accessToken = $token->createAccessToken($id);
+        $loginToken = $token->createLoginToken($id);
+        //$accessToken = $token->createAccessToken($id);
 
         $std = new stdClass();
         $std->user = $user;
-        $std->refreshToken = $refreshToken;
-        $std->accessToken = $accessToken;
+        $std->loginToken = $loginToken;
+        //$std->accessToken = $accessToken;
 
         $response = new JsonResponse();
         return $response->success($std, 1);

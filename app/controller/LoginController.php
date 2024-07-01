@@ -3,7 +3,9 @@
 namespace App\Controller;
 
 use App\Model\LoginModel;
+use Gemvc\Core\Auth;
 use Gemvc\Core\Controller;
+use Gemvc\Http\JWTToken;
 use Gemvc\Http\Request;
 use Gemvc\Http\Response;
 use Gemvc\Http\JsonResponse;
@@ -26,12 +28,11 @@ class LoginController extends Controller
     public function loginByToken(): JsonResponse
     {
         $this->request->post = [];
+        $auth = new Auth($this->request);
+        if(!$auth->isAuthenticated)
+        {
+            return Response::forbidden($auth->error);
+        }
         return (new LoginModel($this->request))->loginByToken();
-    }
-
-    public function accessToken(): JsonResponse
-    {
-        $this->request->post = [];
-        return (new LoginModel($this->request))->accessToken();
     }
 }

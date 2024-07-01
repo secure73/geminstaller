@@ -23,6 +23,11 @@ class UserTable extends Table
         return 'users';
     }
 
+    /**
+     * @param string|null $email
+     * @return false|UserTable
+     * false or UserTable Object
+     */
     public function selectByEmail(string $email = null): false|UserTable
     {
         if ($email) {

@@ -5,7 +5,6 @@ use Gemvc\Core\Controller;
 use App\Model\IndexModel;
 use Gemvc\Http\JsonResponse;
 
-
 class IndexController extends Controller {
 
     public function __construct(Request $request){
