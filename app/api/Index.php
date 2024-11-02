@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Service;
+namespace App\Api;
 
 use App\Controller\IndexController;
-use Gemvc\Core\Service;
+use Gemvc\Core\ApiService;
 use Gemvc\Http\Request;
 use Gemvc\Http\JsonResponse;
 
-class Index extends Service
+class Index extends ApiService
 {
     public function __construct(Request $request)
     {

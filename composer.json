@@ -1,19 +1,17 @@
 {
-    "name": "gemvc/framework",
+    "name": "my_app/v1",
     "description": "Super light Framework based on Gemvc Library",
     "type": "library",
     "require": {
-        "gemvc/library": "^3"
+        "gemvc/framework": "^4"
     },
     "license": "Apache-2.0",
     "autoload": {
         "psr-4": {
-            "GemFramework\\": "src/",
-            "Gemvc\\Core\\": "src/core/",
-            "Gemvc\\Traits\\" : "src/traits/",
-            "Gemvc\\Traits\\Table\\" : "src/traits/table/",
-            "Gemvc\\Traits\\Model\\" : "src/traits/model/",
-            "Gemvc\\Traits\\Controller\\" : "src/traits/controller/"
+            "App\\Api\\": "app/api/",
+            "App\\Controller\\" : "app/controller/",
+            "App\\Model\\" : "app/model/",
+            "App\\Table\\" : "app/table/"
         }
     },
     "authors": [

@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Service;
+namespace App\Api;
 
 use App\Controller\LoginController;
-use Gemvc\Core\Service;
+use Gemvc\Core\ApiService;
 use Gemvc\Http\Request;
 use Gemvc\Http\JsonResponse;
 
-class Login extends Service
+class Login extends ApiService
 {
     public function __construct(Request $request)
     {
@@ -24,3 +24,4 @@ class Login extends Service
         return (new LoginController($this->request))->loginByToken();
     }
 }
+
