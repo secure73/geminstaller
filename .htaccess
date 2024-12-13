@@ -1,18 +1,19 @@
-<IfModule Module mod_rewite.c>
-ewriteEngine On
-ewriteCond %{REQUEST_FILENAME} !-d
-ewriteCond %{REQUEST_FILENAME} !-f
-ewriteCond %{REQUEST_FILENAME} !-l
-RewriteRule ^(.*)$ index.php/$1 [R=301,L]
-ewriteRule ^(.+)$ index.php?url=$1 [QSA,L]
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    
+    # Handle Authorization Header
+    RewriteCond %{HTTP:Authorization} ^(.+)$
+    RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+    
+    # Main URL Rewriting
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME} !-l
+    RewriteRule ^(.*)$ index.php?url=$1 [QSA,L]
 </IfModule>
 
-RewriteEngine On
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-l
-RewriteRule ^(.+)$ index.php?url=$1 [QSA,L]
+# Prevent directory listing
+Options -Indexes
 
-RewriteEngine On
-RewriteCond %{HTTP:Authorization} ^(.+)$
-RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+# Set default character set
+AddDefaultCharset UTF-8
