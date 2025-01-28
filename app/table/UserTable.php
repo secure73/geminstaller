@@ -2,13 +2,9 @@
 
 namespace App\Table;
 
-use Gemvc\Core\Table;
-use Gemvc\Traits\Table\InsertSingleQueryTrait;
-use Gemvc\Traits\Table\UpdateQueryTrait;
-class UserTable extends Table 
+use Gemvc\Core\CRUDTable;
+class UserTable extends CRUDTable 
 {
-    use InsertSingleQueryTrait;
-    use UpdateQueryTrait;
     public int $id;
     public string $email;
     public string $password;
@@ -24,27 +20,28 @@ class UserTable extends Table
     }
 
     /**
-     * @param string|null $email
-     * @return false|UserTable
-     * false or UserTable Object
+     * @return null|static
+     * null or UserTable Object
      */
-    public function selectByEmail(string $email = null): false|UserTable
+    public function selectByEmail(): null|static
     {
-        if ($email) {
-            $this->email = $email;
-        }
         $result = $this->select()->where('email', $this->email)->limit(1)->run();
-        if (!$result || count($result) !==1) {
-            return false;
+        if (count($result) !==1) {
+            return null;
         }
         return  $result[0];
     }
 
-    public function selectById(int $id): bool|UserTable
+    /**
+     * Summary of selectById
+     * @param int $id
+     * @return static|null
+     */
+    public function selectById(int $id): null|static
     {
         $result = $this->select()->where('id', $id)->limit(1)->run();
-        if (!$result || count($result) !== 1) {
-            return false;
+        if (count($result) !== 1) {
+            return null;
         }
         return $result[0];
     }
