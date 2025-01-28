@@ -1,19 +1,27 @@
 <IfModule mod_rewrite.c>
     RewriteEngine On
     
-    # Handle Authorization Header
     RewriteCond %{HTTP:Authorization} ^(.+)$
     RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
     
-    # Main URL Rewriting
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_FILENAME} !-l
     RewriteRule ^(.*)$ index.php?url=$1 [QSA,L]
 </IfModule>
 
-# Prevent directory listing
 Options -Indexes
 
-# Set default character set
 AddDefaultCharset UTF-8
+
+<FilesMatch "\.(env|htaccess|ini|log|sh|bak)$">
+    Require all denied
+</FilesMatch>
+
+<Directory "app">
+    Require all denied
+</Directory>
+
+<Directory "vendor">
+    Require all denied
+</Directory>
