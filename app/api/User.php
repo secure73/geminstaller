@@ -91,6 +91,16 @@ class User extends ApiService
                     '_refreshToken' => 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9...'
                 ]
             ],
+            'updatePassword' => [
+                'response_code' => 200,
+                'message' => 'OK',
+                'count' => 1,
+                'service_message' => 'Password updated successfully',
+                'data' => [
+                    'id' => 1,
+                    'email' => 'user@example.com'
+                ]
+            ],
             default => [
                 'success' => false,
                 'message' => 'Unknown method'

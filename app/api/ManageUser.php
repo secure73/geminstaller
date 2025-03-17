@@ -26,7 +26,13 @@ class ManageUser extends AuthService
         return (new UserController($this->request))->updateRole();
     }
 
-
+    /**
+     * Generates mock responses for API documentation
+     * 
+     * @param string $method The API method name
+     * @return array<mixed> Example response data for the specified method
+     * @hidden
+     */
     public static function mockResponse(string $method): array
     {
         return match($method){

@@ -41,6 +41,49 @@ Gemvc\
     └── JsonResponse.php
 ```
 
+### Application Structure
+The framework follows a layered architecture pattern:
+
+```
+/app
+├── api/         # API service layer - handles endpoints and request validation
+├── controller/  # Business logic layer - implements application logic
+├── model/       # Data models - represents data structures
+├── table/       # Database table definitions - handles database operations
+└── .env         # Environment configuration - stores application settings
+```
+
+#### Layer Responsibilities
+- **API Layer** (`/app/api`): 
+  - Handles HTTP requests and responses
+  - Validates input data
+  - Routes requests to appropriate controllers
+  - Implements API documentation
+
+- **Controller Layer** (`/app/controller`):
+  - Contains business logic
+  - Processes validated requests
+  - Interacts with models
+  - Returns processed results
+
+- **Model Layer** (`/app/model`):
+  - Defines data structures
+  - Implements data validation rules
+  - Handles data relationships
+
+- **Table Layer** (`/app/table`):
+  - Manages database operations
+  - Implements CRUD operations
+  - Handles database relationships
+
+#### Environment Configuration
+The framework uses Symfony's Dotenv component for environment management:
+```php
+// index.php
+$dotenv = new Dotenv();
+$dotenv->load(__DIR__.'/app/.env');
+```
+
 ### Important Notes
 1. Always use `Gemvc\Core\Auth` for authentication (not `Gemvc\Auth\Auth`)
 2. Core components are in the `Core` namespace
@@ -209,6 +252,72 @@ public static function mockResponse(string $method): array
 }
 ```
 
+## AI Assistant Support
+The GEMVC Framework includes comprehensive AI Assistant rules to ensure consistent and secure development assistance. These rules are defined in `GEMVCAIAssistantRules.json` and cover:
+
+### Key AI Assistant Guidelines
+1. **Core Principles**
+   - Security-first approach
+   - Strict type safety (PHPStan level 9)
+   - Respect for layered architecture
+   - Framework convention adherence
+
+2. **Architecture Understanding**
+   - Layer-specific responsibilities
+   - Proper inheritance requirements
+   - Access control between layers
+   - Component relationships
+
+3. **Security Enforcement**
+   - Authentication patterns
+   - Input validation methods
+   - Parameter handling
+   - Token validation
+
+4. **Response Standards**
+   - Consistent response formats
+   - HTTP status code mapping
+   - Error handling patterns
+
+### AI Assistant Resources
+The framework provides several resources to support AI-assisted development:
+
+1. **Framework AI Assist**
+   - Location: `vendor/gemvc/framework/GEMVCFrameworkAIAssist.jsonc`
+   - Purpose: Framework-specific AI assistance rules
+   - Features: Architecture patterns, security rules, best practices
+
+2. **Library AI Assist**
+   - Location: `vendor/gemvc/library/AIAssist.jsonc`
+   - Purpose: Core library AI assistance rules
+   - Features: Component usage, error handling, security patterns
+
+3. **API References**
+   - Framework: `vendor/gemvc/framework/GEMVCFrameworkAPIReference.json`
+   - Library: `vendor/gemvc/library/GEMVCLibraryAPIReference.json`
+   - Purpose: Detailed API documentation for AI assistance
+
+### AI Assistant Best Practices
+When working with AI assistants, follow these guidelines:
+
+1. **Code Generation**
+   - Always verify generated code against framework rules
+   - Ensure proper layer separation
+   - Validate security implementations
+   - Check type safety compliance
+
+2. **Documentation**
+   - Use PHPDoc comments for all public methods
+   - Include mock responses for API endpoints
+   - Provide clear examples in comments
+   - Follow framework documentation standards
+
+3. **Security**
+   - Verify authentication implementations
+   - Validate input handling
+   - Check parameter setting methods
+   - Ensure proper error responses
+
 ## Additional Resources
 - [GEMVC Framework Documentation](vendor/gemvc/framework/Documentation.md)
 - [GEMVC Framework API Reference](vendor/gemvc/framework/GEMVCFrameworkAPIReference.json)
@@ -216,3 +325,4 @@ public static function mockResponse(string $method): array
 - [GEMVC Library Documentation](vendor/gemvc/library/Documentation.md)
 - [GEMVC Library API Reference](vendor/gemvc/library/GEMVCLibraryAPIReference.json)
 - [GEMVC Library AI Assist](vendor/gemvc/library/AIAssist.jsonc)
+- [GEMVC AI Assistant Rules](GEMVCAIAssistantRules.json)
