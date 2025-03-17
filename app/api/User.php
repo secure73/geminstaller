@@ -6,7 +6,7 @@ use App\Controller\UserController;
 use Gemvc\Core\ApiService;
 use Gemvc\Http\Request;
 use Gemvc\Http\JsonResponse;
-
+use Gemvc\Core\Auth;
 /**
  * User Service Class
  * 
@@ -42,6 +42,19 @@ class User extends ApiService
         $this->validatePosts(['email'=>'email' , 'password'=>'string']);
         return (new UserController($this->request))->login();
     }
+
+    public function updatePassword(): JsonResponse
+    {
+        //in this way only authenticated user can update his password
+        $auth = new Auth($this->request);
+        //password type of string and min length 6 and max length 15
+        $this->validateStringPosts(['password'=>'6|15']);
+        //set the id to the authenticated user id, in this way authenticated user can update only his own password
+        $this->request->post['id'] = $auth->token->user_id;
+        
+        return (new UserController($this->request))->updatePassword();
+    }
+
 
     /**
      * Generates mock responses for API documentation

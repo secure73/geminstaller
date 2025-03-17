@@ -40,10 +40,21 @@ class UserModel extends UserTable
         return $this->createTokens($success);
     }
 
+    public function updateRole(): JsonResponse
+    {
+        $user = $this->selectById($this->id);
+        if(!$user){
+            return Response::notFound("user not found");
+        }
+        $user->role = $this->role;
+        $user->update("id",$this->id);
+        return Response::success($user,1,"role updated successfully");
+    }   
+
     private function createTokens(UserModel $user): JsonResponse
     {
         $token = new JWTToken();
-        $token->role = "user";
+        $token->role = $user->role;
         $user->password = "-";
         $this->_accessToken = $token->createAccessToken($user->id);
         $this->_refreshToken = $token->createRefreshToken($user->id);
