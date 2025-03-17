@@ -32,17 +32,4 @@ class UserTable extends CRUDTable
         return  $result[0];
     }
 
-    /**
-     * Summary of selectById
-     * @param int $id
-     * @return static|null
-     */
-    public function selectById(int $id): null|static
-    {
-        $result = $this->select()->where('id', $id)->limit(1)->run();
-        if (count($result) !== 1) {
-            return null;
-        }
-        return $result[0];
-    }
 }

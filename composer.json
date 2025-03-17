@@ -3,7 +3,10 @@
     "description": "Super light Framework based on Gemvc Library",
     "type": "library",
     "require": {
-        "gemvc/framework": "^5.6"
+        "gemvc/framework": "^5.9"
+    },
+    "require-dev": {
+        "phpstan/phpstan": "^1.10"
     },
     "license": "Apache-2.0",
     "autoload": {
@@ -13,6 +16,10 @@
             "App\\Model\\" : "app/model/",
             "App\\Table\\" : "app/table/"
         }
+    },
+    "scripts": {
+        "phpstan": "phpstan analyse",
+        "phpstan:baseline": "phpstan analyse --generate-baseline"
     },
     "authors": [
         {

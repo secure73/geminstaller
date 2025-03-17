@@ -6,6 +6,7 @@ use Gemvc\Core\ApiService;
 use Gemvc\Http\Request;
 use Gemvc\Http\JsonResponse;
 use Gemvc\Http\Response;
+use Gemvc\Core\Documentation;
 
 class Index extends ApiService
 {
@@ -18,5 +19,10 @@ class Index extends ApiService
     {
         $this->validatePosts([]);
         return Response::success("gemvc is successfully installed");
+    }
+
+    public function document(): never
+    {
+        (new Documentation())->html();
     }
 }

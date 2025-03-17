@@ -7,10 +7,11 @@ use Gemvc\Helper\CryptHelper;
 use Gemvc\Http\JsonResponse;
 use Gemvc\Http\JWTToken;
 use Gemvc\Http\Response;
-use stdClass;
 
 class UserModel extends UserTable
 {
+    public string $_accessToken;
+    public string $_refreshToken;
     public function __construct()
     {
         parent::__construct();
@@ -44,11 +45,8 @@ class UserModel extends UserTable
         $token = new JWTToken();
         $token->role = "user";
         $user->password = "-";
-        
-        $std = new stdClass();
-        $std->user = $user;
-        $std->access_token = $token->createAccessToken($user->id);
-        $std->refresh_token = $token->createRefreshToken($user->id);
-        return Response::success($std,1,"login successfull");
+        $this->_accessToken = $token->createAccessToken($user->id);
+        $this->_refreshToken = $token->createRefreshToken($user->id);
+        return Response::success($user,1,"login successfull");
     }
 }

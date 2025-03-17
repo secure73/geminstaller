@@ -5,7 +5,6 @@ namespace App\Controller;
 use App\Model\UserModel;
 use Gemvc\Core\Controller;
 use Gemvc\Http\Request;
-use Gemvc\Http\Response;
 use Gemvc\Http\JsonResponse;
 
 class UserController extends Controller
