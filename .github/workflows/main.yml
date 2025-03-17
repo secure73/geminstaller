@@ -1,7 +1,7 @@
 name: 🚀 Deploy website on push
 on:
   push:
-    branches: [ deploy ]
+    branches: [ main ]
 
 jobs:
   web-deploy:
