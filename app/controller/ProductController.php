@@ -18,6 +18,10 @@ class ProductController extends Controller
     public function create(): JsonResponse
     {
         $model = new ProductModel();
+        //mapPost($model) is one of the most common and important method in controller layer
+        //it map the incomming post data to the target object!
+        //this method check all target object if can accept the data type! now you can enjoy php82+ features!
+        //also you can enjoy phpstan level 9! full type support without tedius type mapping!
         $this->mapPost($model);
         return $model->createModel();
     }
@@ -25,6 +29,10 @@ class ProductController extends Controller
     public function read(): JsonResponse
     {
         $model = new ProductModel();
+        //mapPost($model) is one of the most common and important method in controller layer
+        //it map the incomming post data to the target object!
+        //this method check all target object if can accept the data type! now you can enjoy php82+ features!
+        //also you can enjoy phpstan level 9! full type support without tedius type mapping!
         $this->mapPost($model);
         return $model->readModel();
     }
@@ -32,6 +40,10 @@ class ProductController extends Controller
     public function update(): JsonResponse
     {
         $model = new ProductModel();
+        //mapPost($model) is one of the most common and important method in controller layer
+        //it map the incomming post data to the target object!
+        //this method check all target object if can accept the data type! now you can enjoy php82+ features!
+        //also you can enjoy phpstan level 9! full type support without tedius type mapping!
         $this->mapPost($model);
         return $model->updateModel();
     }
@@ -39,6 +51,10 @@ class ProductController extends Controller
     public function delete(): JsonResponse
     {
         $model = new ProductModel();
+        //mapPost($model) is one of the most common and important method in controller layer
+        //it map the incomming post data to the target object!
+        //this method check all target object if can accept the data type! now you can enjoy php82+ features!
+        //also you can enjoy phpstan level 9! full type support without tedius type mapping!
         $this->mapPost($model);
         return $model->deleteModel();
     }
@@ -46,8 +62,10 @@ class ProductController extends Controller
     public function list(): JsonResponse
     {
         $model = new ProductModel();
-        // there is way how to create list with filterable, sortable, findable
-        //no need at all to have list method in model
+        //mapPost($model) is one of the most common and important method in controller layer
+        //it map the incomming post data to the target object!
+        //this method check all target object if can accept the data type! now you can enjoy php82+ features!
+        //also you can enjoy phpstan level 9! full type support without tedius type mapping!
         return $this->createList($model);
     }
 } 

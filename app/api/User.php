@@ -30,12 +30,22 @@ class User extends ApiService
 
     public function register(): JsonResponse
     {
+        //validate the post data is one of the most important part in GEMVC framework
+        //this method firstof all sanitize  and then validate the data
+        //also by using this method you have full auto complete Documentations !
+        //this method is essntial to validate the data before sending it to the model layer and it is very easy to use
+        //also it return proper failure messages and response codes to front end developer!
         $this->validatePosts(['email'=>'email' , 'password'=>'string']);
         return (new UserController($this->request))->register();
     }
 
     public function login(): JsonResponse
     {
+        //validate the post data is one of the most important part in GEMVC framework
+        //this method firstof all sanitize  and then validate the data
+        //also by using this method you have full auto complete Documentations !
+        //this method is essntial to validate the data before sending it to the model layer and it is very easy to use
+        //also it return proper failure messages and response codes to front end developer!
         $this->validatePosts(['email'=>'email' , 'password'=>'string']);
         return (new UserController($this->request))->login();
     }
