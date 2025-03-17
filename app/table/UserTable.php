@@ -47,4 +47,7 @@ class UserTable extends CRUDTable
         return $result[0] ?? null;
     }
 
+        
+
+
 }

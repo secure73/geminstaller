@@ -4,10 +4,8 @@ namespace App\Controller;
 
 use App\Model\UserModel;
 use Gemvc\Core\Controller;
-use Gemvc\Helper\CryptHelper;
 use Gemvc\Http\Request;
 use Gemvc\Http\JsonResponse;
-use Gemvc\Http\Response;
 
 class UserController extends Controller
 {

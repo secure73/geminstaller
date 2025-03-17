@@ -10,20 +10,44 @@ services:
       - "8080:80"
     volumes:
       - .:/var/www/html
+    environment:
+      - DB_HOST=db
+      - DB_PORT=3306
+      - DB_NAME=app_db
+      - DB_CHARSET=utf8
+      - DB_USER=root
+      - DB_PASSWORD=rootpassword
+      - TOKEN_SECRET=some secret
+      - TOKEN_ISSUER=MyCompany
+      - LOGIN_TOKEN_VALIDATION_IN_SECONDS=789000
+      - REFRESH_TOKEN_VALIDATION_IN_SECONDS=43200
+      - ACCESS_TOKEN_VALIDATION_IN_SECONDS=1200
+      - QUERY_LIMIT=10
+      - SERVICE_IN_URL_SECTION=1
+      - METHOD_IN_URL_SECTION=2
     depends_on:
-      - db
+      db:
+        condition: service_healthy
+    networks:
+      - gemvc-network
 
   db:
     image: mariadb:latest
     container_name: mariadb
     environment:
       MYSQL_ROOT_PASSWORD: rootpassword
-      MYSQL_DATABASE: mydatabase
-      MYSQL_USER: myuser
-      MYSQL_PASSWORD: mypassword
+      MYSQL_DATABASE: app_db
+      MYSQL_CHARSET: utf8
     volumes:
       - db_data:/var/lib/mysql
-  #in production you can remove phpmyadmin service
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - gemvc-network
+
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
     container_name: phpmyadmin
@@ -33,7 +57,14 @@ services:
     ports:
       - "8081:80"
     depends_on:
-      - db
+      db:
+        condition: service_healthy
+    networks:
+      - gemvc-network
+
+networks:
+  gemvc-network:
+    driver: bridge
 
 volumes:
   db_data:
