@@ -1,5 +1,12 @@
 <?php
-
+/**
+ * this is service layer. what so called url end point
+ * this layer shall be extended from ApiService class
+ * this layer is responsible for handling the request and response
+ * this layer is responsible for handling the authentication
+ * this layer is responsible for handling the authorization
+ * this layer is responsible for handling the validation
+ */
 namespace App\Api;
 
 use App\Controller\ProductController;

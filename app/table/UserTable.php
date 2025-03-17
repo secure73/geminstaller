@@ -1,15 +1,20 @@
 <?php
 
+/**
+ * this is table layer. what so called Data access layer
+ * classes in this layer shall be extended from CRUDTable or Gemvc\Core\Table ;
+ * for each column in database table, you must define property in this class with same name and property type;
+ */ 
 namespace App\Table;
 
 use Gemvc\Core\CRUDTable;
 /**
  * User table class for handling user database operations
  * 
- * @property int $id User's unique identifier
- * @property string $email User's email address
- * @property string $password User's hashed password
- * @property string $role User's role (e.g., 'admin', 'user', 'company-admin', 'teacher')
+ * @property int $id User's unique identifier column id in database table   
+ * @property string $email User's email address column email in database table
+ * @property string $password User's hashed password column password in database table
+ * @property string $role User's role (e.g., 'admin', 'user', 'company-admin', 'teacher') column role in database table
  */
 class UserTable extends CRUDTable 
 {
@@ -25,6 +30,7 @@ class UserTable extends CRUDTable
 
     public function getTable(): string
     {
+        //return the name of the table  in database
         return 'users';
     }
 
