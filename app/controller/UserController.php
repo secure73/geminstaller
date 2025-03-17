@@ -14,6 +14,14 @@ class UserController extends Controller
         parent::__construct($request);
     }
 
+    public function userList(): JsonResponse
+    {
+        $model = new UserModel();
+        // there is way how to create list with filterable, sortable, findable
+        //no need at all to have list method in model
+        return $this->createList($model);
+    }
+
     public function register(): JsonResponse
     {
         $model = new UserModel();

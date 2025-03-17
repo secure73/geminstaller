@@ -52,6 +52,21 @@ class ProductManagement extends AuthService
 
     public function list(): JsonResponse
     {
+        // Define searchable fields and their types
+        $this->request->findable([
+            'name' => 'string',
+            'price' => 'float',
+            'description' => 'string'
+        ]);
+
+        // Define sortable fields
+        $this->request->sortable([
+            'id',
+            'name',
+            'price',
+            'description',
+        ]);
+        
         return (new ProductController($this->request))->list();
     }
 

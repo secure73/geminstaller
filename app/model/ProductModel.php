@@ -5,6 +5,7 @@ namespace App\Model;
 use App\Table\ProductTable;
 use Gemvc\Http\JsonResponse;
 use Gemvc\Http\Response;
+use Gemvc\Traits\Model\ListTrait;
 
 /**
  * Product model class for handling product data

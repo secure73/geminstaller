@@ -14,10 +14,22 @@ class ManageUser extends AuthService
     public function __construct(Request $request)
     {
         parent::__construct($request);
+        //only valid token with admin role can access this resource
         if($this->role !== "admin"){
             Response::forbidden("you are not authorized to access this resource")->show();
             die();
         }
+    }
+
+    public function userList(): JsonResponse
+    {
+        //filterable is for filter by id, role, email example: /api/userList/?filter_byemail=admin@example.com
+        $this->request->filterable(['id'=>'int','role'=>'string','email'=>'email']);
+        //sortable is for sort by id, role, email example: /api/userList/?sort_by_asc=id  or /api/userList/?sort_by=id
+        $this->request->sortable(['id'=>'int','role'=>'string','email'=>'string']);
+        //findable is for search by email like %email% example: /api/userList/?find_like=email=john@exam
+        $this->request->findable(['email'=>'email']);
+        return (new UserController($this->request))->userList();
     }
 
     public function updateRole(): JsonResponse

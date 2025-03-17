@@ -46,6 +46,8 @@ class ProductController extends Controller
     public function list(): JsonResponse
     {
         $model = new ProductModel();
+        // there is way how to create list with filterable, sortable, findable
+        //no need at all to have list method in model
         return $this->createList($model);
     }
 } 

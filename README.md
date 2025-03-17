@@ -4,6 +4,43 @@ installer package for gemvc framework
 ## Overview
 GEMVC Framework is built on top of GEMVC Library (v3.27.8), providing a structured approach to building microservice-based RESTful APIs. The framework adds additional features and conventions on top of the library's core functionality.
 
+## AI Assistant Learning Process (RESTRICTED - HIGH IMPORTANCE)
+For AI assistants, the following learning process is mandatory and must be followed in strict order:
+
+1. **Study Working Examples** (First Priority)
+   - Location: `/app` folder
+   - Purpose: Understand real-world implementation patterns
+   - Files to study:
+     - `/app/api/*.php` - API service implementations
+     - `/app/controller/*.php` - Controller implementations
+     - `/app/model/*.php` - Model implementations
+     - `/app/table/*.php` - Table implementations
+   - Focus: Learn from existing working code before attempting any implementation
+
+2. **Read Framework Documentation**
+   - Location: `README.md` (this file)
+   - Purpose: Understand framework structure and basic concepts
+   - Focus: Framework overview, installation, and basic usage
+
+3. **Study AI Assistant Rules**
+   - Location: `GEMVCAIAssistantRules.json`
+   - Purpose: Understand framework-specific guidelines
+   - Focus: Rules, conventions, and best practices
+
+4. **Framework and Library Documentation**
+   - Location: 
+     - `/vendor/gemvc/framework/Documentation.md`
+     - `/vendor/gemvc/library/Documentation.md`
+   - Purpose: Deep understanding of framework and library capabilities
+   - Focus: Detailed technical documentation
+
+### Important Restrictions for AI Assistants
+- Must follow the learning process in strict order
+- No implementation attempts before understanding working examples
+- All implementations must be verified against existing examples
+- Must follow established patterns strictly
+- Must respect framework conventions
+
 ## Installation
 ```bash
 # Install with project name folder
@@ -68,11 +105,16 @@ The framework follows a layered architecture pattern:
 
 - **Model Layer** (`/app/model`):
   - Defines data structures
+  - Extends (inherit) from its relevant table layer file example: TodoModel extends TodoTable
+  - Allways must call parent::__construct(); in its constructor
+  - must not  use CRUDTable or  Table , because its parent  already extended from Table or CRUDTable!
   - Implements data validation rules
   - Handles data relationships
 
 - **Table Layer** (`/app/table`):
   - Manages database operations
+  - Allways Extend (inherit) from Table OR CRUDTable example : TodoTable extends CRUDTable
+  - Allways must call parent::__construct(); in its constructor
   - Implements CRUD operations
   - Handles database relationships
 
@@ -118,7 +160,7 @@ $this->validatePosts([
 
 #### String Length Validation
 ```php
-// For string validation with length constraints
+// For string lenght validation constraints
 $this->validateStringPosts([
     'password' => '6|15'  // min length 6, max length 15
 ]);
@@ -318,7 +360,7 @@ When working with AI assistants, follow these guidelines:
    - Check parameter setting methods
    - Ensure proper error responses
 
-## Additional Resources
+## IMPORTANT Resources
 - [GEMVC Framework Documentation](vendor/gemvc/framework/Documentation.md)
 - [GEMVC Framework API Reference](vendor/gemvc/framework/GEMVCFrameworkAPIReference.json)
 - [GEMVC Framework AI Assist](vendor/gemvc/framework/GEMVCFrameworkAIAssist.jsonc)
@@ -326,233 +368,3 @@ When working with AI assistants, follow these guidelines:
 - [GEMVC Library API Reference](vendor/gemvc/library/GEMVCLibraryAPIReference.json)
 - [GEMVC Library AI Assist](vendor/gemvc/library/AIAssist.jsonc)
 - [GEMVC AI Assistant Rules](GEMVCAIAssistantRules.json)
-
-#### Table Layer Implementation
-The table layer must follow strict implementation rules:
-
-1. **Class Structure**
-   ```php
-   /**
-    * Table class for handling database operations
-    * 
-    * @property int $id Unique identifier
-    * @property string $field Field description
-    */
-   class TableName extends CRUDTable 
-   {
-       public int $id;
-       public string $field;
-
-       public function __construct()
-       {
-           parent::__construct();
-       }
-
-       public function getTable(): string
-       {
-           return 'table_name';
-       }
-
-       /**
-        * @return null|static
-        * null or TableName Object
-        */
-       public function selectById(int $id): null|static
-       {
-           $result = $this->select()->where('id', $id)->limit(1)->run();
-           return $result[0] ?? null;
-       }
-   }
-   ```
-
-2. **Required Elements**
-   - Public property declarations for all columns
-   - Constructor with `parent::__construct()`
-   - `getTable()` method returning table name
-   - PHPDoc with `@property` annotations
-   - Type hints for all properties and methods
-   - Return type declarations for all methods
-   - Custom select methods for specific queries
-
-3. **Forbidden Practices**
-   - Protected/private properties for columns
-   - Missing type declarations
-   - Missing PHPDoc comments
-   - Missing return type declarations
-   - Direct table name property
-   - Using `where()` with LIKE operator
-   - Manual string concatenation for LIKE queries
-
-4. **Query Methods**
-   The framework provides specific methods for common query operations. Always use these methods instead of raw SQL operators:
-
-   ```php
-   // Correct usage:
-   $this->select()->whereLike('name', $name)->run();
-   $this->select()->whereIn('id', $ids)->run();
-   $this->select()->whereNull('deleted_at')->run();
-   $this->select()->whereNotNull('active')->run();
-   $this->select()->whereBetween('price', [$min, $max])->run();
-   $this->select()->whereExists($subquery)->run();
-
-   // Incorrect usage:
-   $this->select()->where('name', 'LIKE', "%$name%")->run();  // Don't use raw LIKE
-   $this->select()->where('id', 'IN', $ids)->run();          // Don't use raw IN
-   $this->select()->where('deleted_at', 'IS NULL')->run();   // Don't use raw IS NULL
-   ```
-
-5. **Best Practices**
-   - Use descriptive method names
-   - Include comprehensive PHPDoc comments
-   - Implement specific select methods for common queries
-   - Follow consistent return type patterns
-   - Maintain proper type safety
-   - Use framework-provided query methods
-   - Avoid raw SQL operators
-   - Keep queries simple and readable
-
-#### Model Layer Implementation
-The model layer must follow strict implementation rules:
-
-1. **Naming Convention**
-   - Class names must end with 'Model' suffix (e.g., `ProductModel`, `UserModel`)
-   - File names must match class names exactly (e.g., `ProductModel.php`)
-   - Non-database properties must start with underscore (e.g., `$_created_at`)
-
-2. **Class Structure**
-   ```php
-   /**
-    * Entity model class for handling entity data
-    * 
-    * @property int $id Entity's unique identifier
-    * @property string $name Entity's name
-    * @property string $_created_at Creation timestamp
-    */
-   class EntityNameModel extends EntityNameTable
-   {
-       public function __construct()
-       {
-           parent::__construct();
-       }
-   }
-   ```
-
-3. **Required Elements**
-   - Must extend the corresponding Table class (e.g., `ProductModel extends ProductTable`)
-   - Class-level PHPDoc with `@property` annotations
-   - Constructor with `parent::__construct()`
-   - Type hints for all properties
-   - Return type declarations for all methods
-
-4. **Forbidden Practices**
-   - Class names without 'Model' suffix
-   - Missing type declarations
-   - Missing PHPDoc comments
-   - Missing return type declarations
-   - Protected/private properties
-   - Non-underscore prefixed non-DB properties
-   - File names not matching class names
-   - Redefining properties that exist in parent Table class
-   - Redefining methods that exist in parent Table class
-   - Implementing `fromTable()` method (not needed when extending Table class)
-   - Implementing `selectById()` or similar methods (already in Table class)
-
-5. **Best Practices**
-   - Use descriptive property names
-   - Include comprehensive PHPDoc comments
-   - Keep properties public for framework access
-   - Use type hints consistently
-   - Follow PSR-4 autoloading standards
-   - Maintain proper file naming
-   - Document all properties and methods
-   - Leverage inherited functionality from Table class
-   - Only add model-specific methods that don't exist in Table class
-
-### Controller Layer Best Practices
-
-1. **Controller Rules**
-- Only called by Services
-- Use mapPost for data binding
-- Return JsonResponse
-- Keep business logic isolated
-- Follow single responsibility
-- Use createList() for list operations
-
-2. **Type Safety**
-```php
-class UserController extends Controller {
-    public function create(): JsonResponse {
-        $model = new UserModel();
-        $this->mapPost($model);  // Type-safe mapping
-        return $model->createWithJsonResponse();
-    }
-}
-```
-
-3. **List Operations**
-```php
-class ProductController extends Controller {
-    public function list(): JsonResponse {
-        $model = new ProductModel();
-        return $this->createList($model);  // Handles pagination, sorting, filtering
-    }
-}
-```
-
-The `createList` method provides:
-- Automatic pagination handling
-- Built-in sorting support
-- Filtering capabilities
-- Standard response formatting
-- Proper error handling
-
-4. **Controller Guidelines**
-- Create new model instances per method
-- Never store model instances as properties
-- Let models handle business logic
-- Use framework-provided methods (mapPost, createList)
-- Keep controllers thin and focused
-- Avoid direct database operations
-- Avoid manual response formatting
-
-### Model Layer Implementation
-
-1. **Required Methods**
-```php
-class ProductModel extends ProductTable {
-    public function createModel(): JsonResponse {
-        return $this->insert()->withJsonResponse();
-    }
-
-    public function readModel(): JsonResponse {
-        return $this->select()->withJsonResponse();
-    }
-
-    public function updateModel(): JsonResponse {
-        return $this->update('id', $this->id)->withJsonResponse();
-    }
-
-    public function deleteModel(): JsonResponse {
-        $this->delete($this->id);
-        return new JsonResponse(['success' => true]);
-    }
-}
-```
-
-2. **Model Guidelines**
-- Extend corresponding Table class
-- Implement all CRUD methods with JsonResponse return type
-- Use withJsonResponse() for standard response formatting
-- Keep business logic in model layer
-- Don't redefine inherited properties or methods
-- Use type hints and return type declarations
-- Add PHPDoc comments for all properties
-- Never override parent class CRUD methods with different return types
-
-3. **Best Practices**
-- Leverage inherited functionality from Table class
-- Only add model-specific methods that don't exist in Table class
-- Use withJsonResponse() for consistent API responses
-- Keep models focused on business logic
-- Avoid direct database operations
-- Use proper type declarations
