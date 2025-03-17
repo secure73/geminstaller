@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Model\UserModel;
 use Gemvc\Core\Controller;
+use Gemvc\Helper\CryptHelper;
 use Gemvc\Http\Request;
 use Gemvc\Http\JsonResponse;
 use Gemvc\Http\Response;
@@ -40,10 +41,6 @@ class UserController extends Controller
     {
         $model = new UserModel();
         $this->mapPost($model);
-        $found = $model->selectById($model->id);
-        if(!$found){
-            return Response::notFound("user not found");
-        }
-        return $found->updatePassword();
+        return $model->updatePassword();
     }
 }

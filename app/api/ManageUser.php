@@ -14,7 +14,7 @@ class ManageUser extends AuthService
     public function __construct(Request $request)
     {
         parent::__construct($request);
-        if($this->auth->token->role !== "admin"){
+        if($this->role !== "admin"){
             Response::forbidden("you are not authorized to access this resource")->show();
             die();
         }

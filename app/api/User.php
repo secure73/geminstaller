@@ -7,14 +7,11 @@ use Gemvc\Core\ApiService;
 use Gemvc\Http\Request;
 use Gemvc\Http\JsonResponse;
 use Gemvc\Core\Auth;
+use Gemvc\Http\Response;
 /**
  * User Service Class
- * 
  * Handles user-related API endpoints including registration and authentication.
  * Extends ApiService for base API functionality.
- * 
- * @package App\Api
- * @extends ApiService
  */
 class User extends ApiService
 {
@@ -49,6 +46,10 @@ class User extends ApiService
         $auth = new Auth($this->request);
         //password type of string and min length 6 and max length 15
         $this->validateStringPosts(['password'=>'6|15']);
+        //check if the user in tokenhas id
+        if(!$auth->token ||!$auth->token->user_id){
+            return Response::forbidden("you are not authorized to access this resource");
+        }
         //set the id to the authenticated user id, in this way authenticated user can update only his own password
         $this->request->post['id'] = $auth->token->user_id;
         

@@ -50,9 +50,19 @@ Gemvc\
 6. Auth token user ID is accessed via `$auth->token->user_id` (not `$auth->token->id`)
 7. For string validation with length constraints, use `validateStringPosts()` with format: `['field'=>'min|max']`
 8. For email validation, use `validatePosts()` with format: `['email'=>'email']`
+9. The Auth class automatically handles invalid tokens by returning a 403 response and stopping execution
 
 ### Input Validation Best Practices
 The framework provides different validation methods for different types of input:
+
+#### Authentication
+```php
+// Auth class automatically handles invalid tokens
+$auth = new Auth($this->request);
+// If token is invalid, execution stops with 403 response
+// If token is valid, you can safely access user data
+$this->request->post['id'] = $auth->token->user_id;
+```
 
 #### Basic Validation
 ```php
@@ -72,9 +82,9 @@ $this->validateStringPosts([
 ```
 
 #### Validation Flow
-1. Always validate input before processing
-2. Use appropriate validation method based on input type
-3. For authenticated endpoints, validate auth token first
+1. Always validate authentication first - Auth class will handle invalid tokens automatically
+2. Validate input before processing
+3. Use appropriate validation method based on input type
 4. Set additional parameters after validation
 5. Pass validated request to controller
 
@@ -82,13 +92,13 @@ Example of a secure endpoint:
 ```php
 public function updatePassword(): JsonResponse
 {
-    // 1. Check authentication
+    // 1. Check authentication - automatically stops with 403 if token is invalid
     $auth = new Auth($this->request);
     
     // 2. Validate input with length constraints
     $this->validateStringPosts(['password'=>'6|15']);
     
-    // 3. Set additional parameters
+    // 3. Set additional parameters - safe to do after Auth check
     $this->request->post['id'] = $auth->token->user_id;
     
     // 4. Process request

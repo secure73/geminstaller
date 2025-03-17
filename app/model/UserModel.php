@@ -51,6 +51,18 @@ class UserModel extends UserTable
         return Response::success($user,1,"role updated successfully");
     }   
 
+    public function updatePassword(): JsonResponse
+    {
+        $found = $this->selectById($this->id);
+        if(!$found){
+            return Response::notFound("user not found");
+        }
+        $found->password = CryptHelper::hashPassword($this->password);
+        $found->update("id",$this->id);
+        $found->password = "-";
+        return Response::success($found,1,"password updated successfully");
+    }
+
     private function createTokens(UserModel $user): JsonResponse
     {
         $token = new JWTToken();
